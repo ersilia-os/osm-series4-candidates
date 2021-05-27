@@ -1,0 +1,3 @@
+streamlit
+rdkit-pypi
+mols2grid
