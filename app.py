@@ -37,8 +37,8 @@ Activity = st.sidebar.slider(
 
 MW = st.sidebar.slider(
     label="Show compounds with molecular weight over",
-    min_value=0.,
-    max_value=1.,
+    min_value=200.,
+    max_value=800.,
     value=0.6,
     step=0.01,
 )
