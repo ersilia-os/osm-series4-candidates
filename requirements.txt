@@ -1,0 +1,5 @@
+streamlit
+pandas
+rdkit-pypi
+mols2grid
+opencv-python-headless
