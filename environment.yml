@@ -1,8 +1,0 @@
-name: mols2grid
-channels:
-  - conda-forge
-dependencies:
-  - rdkit
-  - pip:
-    - streamlit
-    - mols2grid
