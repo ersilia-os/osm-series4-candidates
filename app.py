@@ -30,5 +30,5 @@ df_result = df[df["total_score"] > score]
 st.write("### Series 4 derived compounds: eos-#batch-#compound", df_result)
 
 
-raw_html = mols2grid.display(df_result.head(100), subset=["eosID","img", "total_score"], tooltip=["eosID", "SMILES","InchiKey", "MW"], selection=False, n_cols=7)._repr_html_()
-components.html(raw_html, width=1250, height=1250, scrolling=True)
+raw_html = mols2grid.display(df_result.head(100), subset=["eosID","img", "total_score"], tooltip=["eosID", "SMILES","InchiKey", "MW"], selection=False, n_cols=5)._repr_html_()
+components.html(raw_html, width=1000, height=1000, scrolling=True)
