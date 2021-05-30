@@ -10,7 +10,7 @@ st.title("Series4 new proposed compounds")
 @st.cache(allow_output_mutation=True)
 def download_dataset():
     """Loads once then cached for subsequent runs"""
-    df = pd.read_csv("data/processed_results/all_batches.csv")
+    df = pd.read_csv("data/ReinventResults/processed_results/all_batches.csv")
     df=df.round({"total_score":3})
     return df
 
