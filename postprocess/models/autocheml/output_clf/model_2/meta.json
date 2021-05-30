@@ -1,0 +1,9 @@
+{
+    "is_clf": true,
+    "descriptor": "maccs",
+    "dim": [
+        387,
+        167
+    ],
+    "output": "bin_activity"
+}

@@ -1,0 +1,9 @@
+{
+    "is_clf": false,
+    "descriptor": "maccs",
+    "dim": [
+        387,
+        167
+    ],
+    "output": "norm_activity"
+}
