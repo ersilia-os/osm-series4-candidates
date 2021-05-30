@@ -1,0 +1,9 @@
+{
+    "is_clf": false,
+    "descriptor": "ecfp_counts",
+    "dim": [
+        387,
+        2048
+    ],
+    "output": "norm_activity"
+}

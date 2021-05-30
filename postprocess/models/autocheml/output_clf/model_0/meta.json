@@ -1,0 +1,9 @@
+{
+    "is_clf": true,
+    "descriptor": "avalon",
+    "dim": [
+        387,
+        1024
+    ],
+    "output": "bin_activity"
+}

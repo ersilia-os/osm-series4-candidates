@@ -1,0 +1,9 @@
+{
+    "is_clf": true,
+    "descriptor": "ecfp_counts",
+    "dim": [
+        387,
+        2048
+    ],
+    "output": "bin_activity"
+}
