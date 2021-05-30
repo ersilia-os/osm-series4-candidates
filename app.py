@@ -52,13 +52,13 @@ RA = col1.slider(
 
 col2.header("EOS - #batch - #compound")
             
-df_result = df[(df["MolWeight"] > MW) & (df["AvActivity"] > Activity) & (df["RAScore"] > RA)]
+df_result = df[(df["MolWeight"] > MW) & (df["ActivityAvg"] > Activity) & (df["RAScore"] > RA)]
 col2.dataframe(df_result,width=None, height=600)
 
 
 
 st.subheader("Molecular Structures")
-raw_html = mols2grid.display(df_result.head(100), subset=["EosId","img", "AvActivity"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=6)._repr_html_()
+raw_html = mols2grid.display(df_result.head(100), subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=6)._repr_html_()
 components.html(raw_html,height=600, scrolling=True)
 
 st.subheader("Molecular weight distribution")
