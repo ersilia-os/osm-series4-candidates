@@ -1,4 +1,4 @@
-eosID,Batch,SMILES,InchiKey,Scaffold,MolWeight,TotalScore
+EosId,Batch,Smiles,InChIKey,Scaffold,MolWeight,TotalScore
 EOS-0-00003,0,Fc1ccc(-c2nnc3cncc(OCCc4ccc(Cl)cc4)n23)cc1,CCGWNWHCPJVKRM-UHFFFAOYSA-N,Fc1ccc(-c2nnc3cncc(OCCc4ccc(Cl)cc4)n23)cc1,368.79900000000004,0.798210084438324
 EOS-0-00005,0,Fc1ccc(CCOc2cncc3nnc(-c4ccc(F)cc4)n23)cc1,LAQJZAPMBJGRKJ-UHFFFAOYSA-N,Fc1ccc(CCOc2cncc3nnc(-c4ccc(F)cc4)n23)cc1,352.34400000000005,0.7923701405525208
 EOS-0-00006,0,Fc1ccc(-c2nnc3cncc(OCCc4ccc(Cl)c(F)c4)n23)cc1,JMWHMNDBYMOZOE-UHFFFAOYSA-N,Fc1ccc(-c2nnc3cncc(OCCc4ccc(Cl)c(F)c4)n23)cc1,386.78900000000004,0.7918548583984375

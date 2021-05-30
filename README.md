@@ -25,15 +25,33 @@ Batch03 is an enlargement of Batch02 including more restrictions for desired phy
 
 ### Batch04 and Batch05
 Finally, with a diversified chemical space from series 4, we have focused our efforts on obtaining compounds with improved predicted activity. To this end, we have used a Chemprop model trained on the 100K datapoints from previous experiments (Batch04) and the original AutoML predictor (Batch05).
-Batch04 includes 8833 molecules and Batch05 includes
+Batch04 includes 8833 molecules and Batch05 includes 5352 molecules.
 
 ## Results
-* Batch data in CSV:
-  * [Batch 00](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/ReinventResults/ProcessedResults/processed0.csv)
-  * [Batch 01](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/ReinventResults/ProcessedResults/processed1.csv)
-  * [Batch 02](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/ReinventResults/ProcessedResults/processed2.csv)
-  * [Batch 03](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/ReinventResults/ProcessedResults/processed3.csv)
-  * [Batch 04](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/ReinventResults/ProcessedResults/processed4.csv)
-* Streamlit app visualization:  https://share.streamlit.io/ersilia-os/osm-series4-candidates/main/app.py
+An excel containing all candidates with the following information can be found [here]():
+* EosID: new series 4 candidates have been annotated as EOS - #batch - #xxxxx
+* Smiles: canonical smiles
+* InChIKey
+* MolWeight: molecular weight (g/mol)
+* NumRings: number of rings
+* Batch: batch of generation (0 to 5)
+* Predicted scores for:
+    * QED (0:not drug like - 1: max similarity to known drugs)
+    * SLogP: octanol-water partition coefficient as a measure of solubility.Lower values indicate higher hidrophilicity
+    * SAScore (0-1): synthetic accessibility (rdKit)
+    * RAScore (0-1): retrosynthetic accessibility from the [Reymond Group](https://github.com/reymond-group/RAscore)
+    * Tanimoto similarity with existing series 4 molecules (0: no similarity - 1: repeated molecule)
+    * Triazolopyrazine core maintenance (0: no core -  1: core)
+    * Activity against P. Falciparum:
+        * ClfAutoMl (0: inactive - 1: active): autoML random forest classifier from sklearn
+        * RegAutoMl (0: inactive - 1: active): autoML random forest regressor from sklearn
+        * ClfGraph (0: inactive - 1: active): Chemprop-based random forest classifier
+        * RegGraph (0: inactive - 1: active): Chemprop-based random forest regressor
+        * AvActivity (0: inactive - 1: active): average of the four activity prediction scores
+* Clustering: the candidates have been clustered according to chemical similarity in:
+    * Cluster100: 100 clusters
+    * Cluster1000: 1000 clusters
 
-* Tree map:
+In addition, we provide an [Streamlit app visualization](https://share.streamlit.io/ersilia-os/osm-series4-candidates/main/app.py) for the 1000 molecules (one from each cluster) with highest predicted activity (using average activity). If there is a particular cluster of interest please refer to the full excel file to select other molecules from the same cluster.
+
+Finally, the 116728 molecules are represented in this [TreeMap]()
