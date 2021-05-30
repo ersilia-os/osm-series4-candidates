@@ -10,7 +10,7 @@ New candidates for the Open Source Malaria series 4 compounds
 
 ## New candidate lists
 ### Batch00
-With this batch, we have tried to narrow the chemical space to series 4 compounds, maintaining the triazolopyrazine core with NW and NE substituents. This has been achieved by forcing matching to the core substructure and similarity to series 4 molecules. In addition, core structures with substitutents at undesired atoms have been restricted. QED Beauty and solubility (SLogP), as well as synthetic (SA) and retrosynthetic accessibility (RA) have been included as scoring components. Finally, activity scoring has been achieved with an autoML random forest classifier and regressor.
+With this batch, we have tried to narrow the chemical space to series 4 compounds, maintaining the triazolopyrazine core with NW and NE substituents. This has been achieved by forcing matching to the core substructure and similarity to series 4 molecules. In addition, core structures with substituents at undesired atoms have been restricted. QED Beauty and solubility (SLogP), as well as synthetic (SA) and retrosynthetic accessibility (RA) have been included as scoring components. Finally, activity scoring has been achieved with an autoML random forest classifier and regressor.
 Batch00 rendered 1867 unique compounds (non-duplicates from original series 4)
 
 ### Batch01
@@ -25,9 +25,16 @@ Batch02 includes 46349 compounds with molecular weight around 400-500 and more d
 Batch03 is an enlargement of batch02 including more restrictions for desired physicochemical characteristics (QED_Score, SLogP, SA and RA).
 
 ### Batch04
-Finally, with a diversified chemical space from series 4, we have focused our efforts on obtaining compounds with improved predicted activity. To this end, we have first trained a [Chemprop model](https://github.com/chemprop/chemprop) using 
+Finally, with a diversified chemical space from series 4, we have focused our efforts on obtaining compounds with improved predicted activity. To this end, we have first trained a [Chemprop model](https://github.com/chemprop/chemprop) using
 
 ## Results
 
+* Batch data in CSV:
+  * [Batch 00-01](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/batch00_01/processed_results/batch00_01.csv)
+  * [Batch 02](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/batch02/processed_results/batch02.csv)
+  * [Batch 03](https://github.com/ersilia-os/osm-series4-candidates/blob/main/data/batch03/processed_results/batch03.csv)
+  * [Batch 04]()
+* Streamlit app visualization:  https://share.streamlit.io/ersilia-os/osm-series4-candidates/main/app.py
 
+* Tree map:
 ## Code and linked repositories
