@@ -17,19 +17,13 @@ def load_data():
 df=load_data()
 
 df=df.round(3) #round numbers to 3 decimals
+df=df.rename(columns={"Smiles":"SMILES"}) #rename SMILES column so it is recognized by Mols2Vec
 
 
 col1, col2=st.beta_columns((1,3)) #create two columns, for slider optins (col1) and table (col2)
 
 col1.header("Search by:")
 
-Score = col1.slider(
-    label="Show compounds with score over",
-    min_value=0.,
-    max_value=1.,
-    value=0.6,
-    step=0.01,
-)
 
 Activity = col1.slider(
     label="Show compounds with activity over",
@@ -58,13 +52,13 @@ RA = col1.slider(
 
 col2.header("EOS - #batch - #compound")
             
-df_result = df[(df["TotalScore"] > Score) & (df["MolWeight"] > MW) & (df["AvActivity"] > Activity) & (df["RAScore"] > RA)]
+df_result = df[(df["MolWeight"] > MW) & (df["AvActivity"] > Activity) & (df["RAScore"] > RA)]
 col2.dataframe(df_result,width=None, height=600)
 
 
 
 st.subheader("Molecular Structures")
-raw_html = mols2grid.display(df_result.head(100), subset=["eosID","img", "TotalScore"], tooltip=["eosID", "SMILES","InchiKey", "AvActivity"], selection=False, n_cols=6)._repr_html_()
+raw_html = mols2grid.display(df_result.head(100), subset=["EosId","img", "AvActivity"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=6)._repr_html_()
 components.html(raw_html,height=600, scrolling=True)
 
 st.subheader("Molecular weight distribution")
