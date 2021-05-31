@@ -11,9 +11,13 @@ from matplotlib.colors import ListedColormap
 from matplotlib import pyplot as plt
 
 
-def main():
-    """ Main funciton """
-    df = pd.read_csv("np_atlas_2019_08.tsv", sep="\t")
+def main(filename):
+    df = pd.read_csv(filename)
+
+    if "_All.csv" in filename:
+        label = "map_100k"
+    else:
+        label = "map_1k"
 
     enc = MHFPEncoder(1024)
     lf = tm.LSHForest(1024, 64)
@@ -27,7 +31,7 @@ def main():
     for i, row in df.iterrows():
         if i != 0 and i % 1000 == 0:
             print(100 * i / len(df))
-        mol = AllChem.MolFromSmiles(row["SMILES"])
+        mol = AllChem.MolFromSmiles(row["Smiles"])
         atoms = mol.GetAtoms()
         size = mol.GetNumHeavyAtoms()
         n_c = 0
@@ -51,8 +55,8 @@ def main():
     lf.batch_add(fps)
     lf.index()
 
-    lf.store("lf.dat")
-    with open("props.pickle", "wb+") as f:
+    lf.store("lf_{0}.dat".format(label))
+    with open("props_{0}.pickle".format(label), "wb+") as f:
         pickle.dump(
             (hac, c_frac, ring_atom_frac, largest_ring_size),
             f,
