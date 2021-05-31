@@ -11,7 +11,7 @@
 
 * [Explore](https://share.streamlit.io/ersilia-os/osm-series4-candidates/main/app.py) a set of selected 1000 candidates.
 * [Download](https://github.com/ersilia-os/osm-series4-candidates/blob/main/postprocess/210530_EOSI_OSM_Series4_All.csv) a CSV file containing >100k candidates for a deeper exploration. This set contains clusters of highly similar molecules.
-* Navigate the set of [>100,000 candidates](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm-eosi-s4.html) using a tree map.
+* Navigate the set of [>100,000 candidates](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm_eosi_s4.html) using a tree map.
 * See the [Colaboratory Notebook](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) of the generative model.
 * Learn more in the OSM GitHub Issue [#33](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/33).
 
@@ -73,7 +73,7 @@ We provide the following data for each candidate in this [file](https://github.c
 
 In addition, we provide a [web-based interface](https://share.streamlit.io/ersilia-os/osm-series4-candidates/main/app.py) for the 1000 molecules (one from each cluster) with highest predicted activity (using average activity). If there is a particular cluster of interest please refer to the full excel file to select other molecules from the same cluster.
 
-Finally, the 116728 molecules are represented in this [TreeMap](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm-eosi-s4.html).
+Finally, the 116728 molecules are represented in this [TreeMap](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm_eosi_s4.html).
 
 
 ## About us
