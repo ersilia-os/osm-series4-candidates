@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 
 st.set_page_config(layout="wide")# force wide display
 st.title("New candidates for OSM Series 4 by Ersilia Open Source Initiative")
-st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) | Repository of [results](https://github.com/ersilia-os/osm-series4-candidates) | Last modified 30th of May 2021")
+st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) | Repository of [results](https://github.com/ersilia-os/osm-series4-candidates) | [Tree Map](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm-eosi-s4.html) | Last modified 30th of May 2021")
 
 @st.cache
 def load_data():
