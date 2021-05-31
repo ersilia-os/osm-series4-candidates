@@ -3,13 +3,11 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import streamlit.components.v1 as components
-from rdkit import Chem
-from rdkit.Chem.Descriptors import ExactMolWt
-import matplotlib.pyplot as plt
 
 
 st.set_page_config(layout="wide")# force wide display
 st.title("New candidates for OSM Series 4 by Ersilia Open Source Initiative")
+st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) | Repository of [results](https://github.com/ersilia-os/osm-series4-candidates) | Last modified 30th of May 2021")
 
 @st.cache
 def load_data():
@@ -24,30 +22,29 @@ df=df[["EosId", "ActivityAvg", "MolWeight", "TanimotoExisting", "QED", "SLogP", 
 
 df=df.rename(columns={"Smiles":"SMILES"}) #rename SMILES column so it is recognized by Mols2Vec
 df=df.rename(columns={"TanimotoExisting":"Tanimoto"}) #rename SMILES column so it is recognized by Mols2Vec
-df=df.round(4) #round activity to 4 decimals
+df=df.round(3) #round activity to 4 decimals
 
 
 # Create Columns with selection options on the left and the dataframe displayed on the right
 col1, col2=st.beta_columns((1,3)) #create two columns, for slider optins (col1) and table (col2)
 
-col1.header("Search by:")
+col1.header("Filter by")
 EosId=df["EosId"].tolist()
-molecule = col1.selectbox("Molecule",([None] + EosId))
+molecule = col1.selectbox("Molecule",(["All"] + EosId))
 
 Activity = col1.slider(
     label="Predicted activity against P. falciparum",
     min_value=0.,
     max_value=1.,
-    value=0.6,
+    value=(0.6, 1.),
     step=0.01,
 )
-
 
 MW = col1.slider(
     label="Molecular weight",
     min_value=200.,
     max_value=600.,
-    value=300.,
+    value=(350.,550.),
     step=0.01,
 )
 
@@ -55,23 +52,39 @@ SA = col1.slider(
     label="Synthetic accessibility",
     min_value=0.,
     max_value=1.,
-    value=0.6,
+    value=(0.6,1.),
     step=0.01,
 )
 
 
-col2.header("EOS - #batch - #compound") 
-if molecule == None:
-    df_result = df[(df["MolWeight"] > MW) & (df["ActivityAvg"] > Activity) & (df["SAScore"] > SA)]
+col2.header("Selection of 1000 candidates")
+if molecule == "All":
+    df_ = df[(df["ActivityAvg"] <= Activity[1]) & (df["ActivityAvg"] >= Activity[0])]
+    df_ = df_[(df_["MolWeight"] <= MW[1]) & (df_["MolWeight"]>= MW[0])]
+    df_result = df_[(df_["SAScore"] <= SA[1]) & (df_["SAScore"]>= SA[0])]
     col2.dataframe(df_result,width=None, height=400)
 else:
-    col2.write(df[df["EosId"] == molecule])
+    df_result=df[df["EosId"] == molecule]
+    col2.write(df_result)
+
+col1.write("{0} molecules selected".format(df_result.shape[0]))
 
 #Display molecular structure of compounds selected above
-st.subheader("Molecular Structures")
-if molecule == None:
-    raw_html = mols2grid.display(df_result.head(100), subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=6)._repr_html_()
-    components.html(raw_html,height=600, scrolling=True)
+
+col1.header("Molecule structures")
+n_cols = col2.slider(
+    label="Grid columns",
+    min_value=4,
+    max_value=12,
+    value=6,
+    step=1)
+
+
+if molecule == "All":
+    raw_html = mols2grid.display(df_result.head(100), subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=n_cols)._repr_html_()
+    components.html(raw_html, width=None, height=600, scrolling=True)
 else:
-    raw_html = mols2grid.display(df[df["EosId"] == molecule], subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=6)._repr_html_()
+    raw_html = mols2grid.display(df_result, subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=n_cols)._repr_html_()
     components.html(raw_html,height=600, scrolling=True)
+
+st.write("[Download 1k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_1000.csv) | [Download 100k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_All.csv) | Disclaimer: this is a first round of generative models, please give us feedback through OSM GitHub Issue [#33](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/33).")
