@@ -13,7 +13,7 @@
 * [Download](https://github.com/ersilia-os/osm-series4-candidates/blob/main/postprocess/210530_EOSI_OSM_Series4_All.csv) a CSV file containing >100k candidates for a deeper exploration. This set contains clusters of highly similar molecules.
 * Navigate the set of [>100,000 candidates](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm_eosi_s4.html) using a tree map.
 * See the [Colaboratory Notebook](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) of the generative model.
-* Learn more in the OSM GitHub Issue [#33](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/33).
+* Learn more in the OSM GitHub Issue [#34](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/34).
 
 ### Disclaimer
 
