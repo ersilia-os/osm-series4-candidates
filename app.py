@@ -56,13 +56,22 @@ SA = col1.slider(
     step=0.01,
 )
 
+SL = col1.slider(
+    label="Solubility (SLogP)",
+    min_value=-1.,
+    max_value=10.,
+    value=(-1.,4.5),
+    step=0.01,
+)
+
 
 col2.header("Selection of 1000 candidates")
 if molecule == "All":
-    df_ = df[(df["ActivityAvg"] <= Activity[1]) & (df["ActivityAvg"] >= Activity[0])]
-    df_ = df_[(df_["MolWeight"] <= MW[1]) & (df_["MolWeight"]>= MW[0])]
-    df_result = df_[(df_["SAScore"] <= SA[1]) & (df_["SAScore"]>= SA[0])]
-    col2.dataframe(df_result,width=None, height=400)
+    df = df[(df["ActivityAvg"] <= Activity[1]) & (df["ActivityAvg"] >= Activity[0])]
+    df = df[(df["MolWeight"] <= MW[1]) & (df["MolWeight"]>= MW[0])]
+    df = df[(df["SLogP"] <= SL[1]) & (df["SLogP"]>= SL[0])]
+    df_result = df[(df["SAScore"] <= SA[1]) & (df["SAScore"]>= SA[0])]
+    col2.dataframe(df_result,width=None, height=500)
 else:
     df_result=df[df["EosId"] == molecule]
     col2.write(df_result)
@@ -73,7 +82,7 @@ col1.write("{0} molecules selected".format(df_result.shape[0]))
 
 col1.header("Molecule structures")
 n_cols = col2.slider(
-    label="Grid columns",
+    label="Number of molecular structre grid columns to display",
     min_value=4,
     max_value=12,
     value=6,
