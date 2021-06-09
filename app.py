@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 
 st.set_page_config(layout="wide")# force wide display
 st.title("New candidates for OSM Series 4 by Ersilia Open Source Initiative")
-st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) | Repository of [results](https://github.com/ersilia-os/osm-series4-candidates) | Last modified 30th of May 2021")
+st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](https://colab.research.google.com/drive/1MK4UJP6Vw1FjaVaTu9CwpBb2XrjPw9xz?usp=sharing) | Repository of [results](https://github.com/ersilia-os/osm-series4-candidates) | [Tree Map](https://ersilia-os.github.io/osm-series4-candidates/tmap/osm_eosi_s4.html) | Last modified 30th of May 2021")
 
 @st.cache
 def load_data():
@@ -96,4 +96,4 @@ else:
     raw_html = mols2grid.display(df_result, subset=["EosId","img", "ActivityAvg"], tooltip=["EosId", "SMILES","InChIKey", "Cluster1000"], selection=False, n_cols=n_cols)._repr_html_()
     components.html(raw_html,height=600, scrolling=True)
 
-st.write("[Download 1k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_1000.csv) | [Download 100k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_All.csv) | Disclaimer: this is a first round of generative models, please give us feedback through OSM GitHub Issue [#33](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/33).")
+st.write("[Download 1k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_1000.csv) | [Download 100k candidates](https://raw.githubusercontent.com/ersilia-os/osm-series4-candidates/main/postprocess/210530_EOSI_OSM_Series4_All.csv) | Disclaimer: this is a first round of generative models, please give us feedback through OSM GitHub Issue [#34](https://github.com/OpenSourceMalaria/Series4_PredictiveModel/issues/34).")
