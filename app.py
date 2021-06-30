@@ -18,39 +18,56 @@ def load_data():
 df=load_data()
 
 #reorder columns to show activity values first
-df=df[["EosId", "ActivityAvg", "MolWeight", "TanimotoExisting", "QED", "SLogP", "SAScore", "RAScore", "IsTriazolo", "NumRings", "ActivityClfAutoML", "ActivityRegAutoML", "ActivityClfGraph", "ActivityRegGraph", "Batch", "Smiles", "InChIKey", "Cluster1000", "Cluster100","Heteroaryl", "Phenyl", "Para", "Meta", "Ortho"]]
+df=df[["EosId", "ActivityAvg", "MolWeight", "TanimotoExisting", "QED", "SLogP", "SAScore", "RAScore", "IsTriazolo", "NumRings", "ActivityClfAutoML", "ActivityRegAutoML", "ActivityClfGraph", "ActivityRegGraph", "Batch", "Smiles", "InChIKey", "Cluster1000", "Cluster100","Heteroaryl", "Phenyl", "Para", "Meta", "Orto"]]
 
 df=df.rename(columns={"Smiles":"SMILES"}) #rename SMILES column so it is recognized by Mols2Vec
 df=df.rename(columns={"TanimotoExisting":"Tanimoto"}) #rename SMILES column so it is recognized by Mols2Vec
 df=df.round(3) #round activity to 4 decimals
 
 #create 5 columns to contain the checkboxes for substructural elements
-st.header("Restrict the Triazolo substituent to the following substructures")
-col1, col2, col3, col4, col5, col6 =st.beta_columns(6) 
+st.header("Restrict the Triazole substituent to the following substructures")
+col1, col2, col3, col4, col5 =st.beta_columns(5) 
 
-check = col1.checkbox('Heteroaryl', help="Phenyl ring with heteroatoms in any of its positions. Does not exclude substituents")
-if check == True:
+check = col1.selectbox('Heteroaryl',["Any", "Yes", "No"], help="Aryl ring with heteroatoms in any of its positions. Does not exclude substituents")
+if check == "Any":
+    df = df
+elif check == "Yes":
     df = df[(df["Heteroaryl"] == 1)]
-
-check2 = col2.checkbox('Phenyl', help="Phenyl ring of carbons exclusively. Does not exclude substituents")
-if check2 == True:
-    df = df[(df["Phenyl"] == 1)]    
-
-check3 = col3.checkbox('Para', help="Phenyl ring or heteroaryl with -para substituents. Does not exclude other substituent positions")
-if check3 == True:
-    df = df[(df["Para"] == 1)]
-    
-check4 = col4.checkbox('Meta', help="Phenyl ring or heteroaryl with -meta substituents. Does not exclude other substituent positions")
-if check4 == True:
-    df = df[(df["Meta"] == 1)]
-    
-check5 = col5.checkbox('Ortho', help="Phenyl ring or heteroaryl with -ortho substituents. Does not exclude other substituent positions")
-if check5 == True:
-    df = df[(df["Ortho"] == 1)]
-    
-check6 = col6.checkbox('Other', help = "RHS substituents that do not contain a aryl first in the link")
-if check6 == True:
+elif check == "No":
     df = df[(df["Heteroaryl"] == 0)]
+    
+
+check2 = col2.selectbox('Phenyl', ["Any", "Yes", "No"], help="Phenyl ring. Does not exclude substituents")
+if check2 == "Any":
+    df = df
+elif check2 == "Yes":
+    df = df[(df["Phenyl"] == 1)]
+elif check2 == "No":
+    df = df[(df["Phenyl"] == 0)] 
+
+check3 = col3.selectbox('Para', ["Any", "Yes", "No"], help="Phenyl ring or heteroaryl with para- substituents. Does not exclude other substituent positions")
+if check3 == "Any":
+    df = df
+elif check3 == "Yes":
+    df = df[(df["Para"] == 1)]
+elif check3 == "No":
+    df = df[(df["Para"] == 0)] 
+    
+check4 = col4.selectbox('Meta', ["Any", "Yes", "No"], help="Phenyl ring or heteroaryl with meta- substituents. Does not exclude other substituent positions")
+if check4 == "Any":
+    df = df
+elif check4 == "Yes":
+    df = df[(df["Meta"] == 1)]
+elif check4 == "No":
+    df = df[(df["Meta"] == 0)] 
+    
+check5 = col5.selectbox('Orto', ["Any", "Yes", "No"], help="Phenyl ring or heteroaryl with -orto- substituents. Does not exclude other substituent positions")
+if check5 == "Any":
+    df = df
+elif check5 == "Yes":
+    df = df[(df["Orto"] == 1)]
+elif check5 == "No":
+    df = df[(df["Orto"] == 0)] 
 
 # Create Columns with selection options on the left and the dataframe displayed on the right
 col1, col2=st.beta_columns((1,3)) #create two columns, for slider optins (col1) and table (col2)
