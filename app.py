@@ -12,18 +12,45 @@ st.write("Know about [Ersilia](https://ersilia.io) | Code for [the analysis](htt
 @st.cache
 def load_data():
     """Loads once then cached for subsequent runs"""
-    df = pd.read_csv("postprocess/210530_EOSI_OSM_Series4_1000.csv")
+    df = pd.read_csv("postprocess/210530_EOSI_OSM_Series4_1000_substr.csv")
     return df
 
 df=load_data()
 
 #reorder columns to show activity values first
-df=df[["EosId", "ActivityAvg", "MolWeight", "TanimotoExisting", "QED", "SLogP", "SAScore", "RAScore", "IsTriazolo", "NumRings", "ActivityClfAutoML", "ActivityRegAutoML", "ActivityClfGraph", "ActivityRegGraph", "Batch", "Smiles", "InChIKey", "Cluster1000", "Cluster100", ]]
+df=df[["EosId", "ActivityAvg", "MolWeight", "TanimotoExisting", "QED", "SLogP", "SAScore", "RAScore", "IsTriazolo", "NumRings", "ActivityClfAutoML", "ActivityRegAutoML", "ActivityClfGraph", "ActivityRegGraph", "Batch", "Smiles", "InChIKey", "Cluster1000", "Cluster100","Heteroaryl", "Phenyl", "Para", "Meta", "Ortho"]]
 
 df=df.rename(columns={"Smiles":"SMILES"}) #rename SMILES column so it is recognized by Mols2Vec
 df=df.rename(columns={"TanimotoExisting":"Tanimoto"}) #rename SMILES column so it is recognized by Mols2Vec
 df=df.round(3) #round activity to 4 decimals
 
+#create 5 columns to contain the checkboxes for substructural elements
+st.header("Restrict the Triazolo substituent to the following substructures")
+col1, col2, col3, col4, col5, col6 =st.beta_columns(6) 
+
+check = col1.checkbox('Heteroaryl', help="Phenyl ring with heteroatoms in any of its positions. Does not exclude substituents")
+if check == True:
+    df = df[(df["Heteroaryl"] == 1)]
+
+check2 = col2.checkbox('Phenyl', help="Phenyl ring of carbons exclusively. Does not exclude substituents")
+if check2 == True:
+    df = df[(df["Phenyl"] == 1)]    
+
+check3 = col3.checkbox('Para', help="Phenyl ring or heteroaryl with -para substituents. Does not exclude other substituent positions")
+if check3 == True:
+    df = df[(df["Para"] == 1)]
+    
+check4 = col4.checkbox('Meta', help="Phenyl ring or heteroaryl with -meta substituents. Does not exclude other substituent positions")
+if check4 == True:
+    df = df[(df["Meta"] == 1)]
+    
+check5 = col5.checkbox('Ortho', help="Phenyl ring or heteroaryl with -ortho substituents. Does not exclude other substituent positions")
+if check5 == True:
+    df = df[(df["Ortho"] == 1)]
+    
+check6 = col6.checkbox('Other', help = "RHS substituents that do not contain a aryl first in the link")
+if check6 == True:
+    df = df[(df["Heteroaryl"] == 0)]
 
 # Create Columns with selection options on the left and the dataframe displayed on the right
 col1, col2=st.beta_columns((1,3)) #create two columns, for slider optins (col1) and table (col2)
@@ -65,7 +92,8 @@ SL = col1.slider(
 )
 
 
-col2.header("Selection of 1000 candidates")
+
+col2.header("Selected candidates from pool of 1000 representatives")
 if molecule == "All":
     df = df[(df["ActivityAvg"] <= Activity[1]) & (df["ActivityAvg"] >= Activity[0])]
     df = df[(df["MolWeight"] <= MW[1]) & (df["MolWeight"]>= MW[0])]
