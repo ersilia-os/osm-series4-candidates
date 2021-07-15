@@ -1,0 +1,9 @@
+Fc1ccc(CCOc2cn3c(-c4ccc(OC(F)F)cc4)nnc3cn2)cc1F
+FC(F)Oc1ccc(-c2nnc3cncc(SCCc4ccccc4)n23)cc1
+OCC(Nc1cncc2nnc(-c3ccc(OC(F)F)cc3)n12)c1ccc(F)c(F)c1
+IC(C=C1)=CC=C1C2=NN=C3C=NC=C(OCCC4=CC(F)=C(F)C=C4)N32
+FC(OC1=CC=C(C2=NN=C3C=NC=C(N32)OCC[C]4BB[CH]BBBBBBBB4)C=C1)F
+O=S(Cc1ccccc1)c1cncc2nnc(-c3ccc(OC(F)F)cc3)n12
+FC(F)Oc1ccc(-c2nnc3cncc(N4CCC(c5ccccc5)C4)n23)cc1
+FC(OC1=CC=C(C2=NN=C3C=NC=C(N32)OCC[C]4[CH]BBBBBBBBBB4)C=C1)F
+Fc1ccc(COc2cn3c(-c4ccc(OC(F)F)cc4)nnc3cn2)cc1F
